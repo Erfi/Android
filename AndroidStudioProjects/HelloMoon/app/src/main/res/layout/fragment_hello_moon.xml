@@ -14,27 +14,33 @@
         android:gravity="center|bottom"
         android:layout_weight="0">
 
-        <Button
-            android:id="@+id/hellomoon_playButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/hellomoon_play" />
+        <!--<Button-->
+            <!--android:id="@+id/hellomoon_playButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:text="@string/hellomoon_play" />-->
 
-        <Button
-            android:id="@+id/hellomoon_pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:text="@string/hellomoon_pause"
-            android:enabled="false" />
+        <!--<Button-->
+            <!--android:id="@+id/hellomoon_pauseButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:text="@string/hellomoon_pause"-->
+            <!--android:enabled="false" />-->
 
+        <!--<Button-->
+            <!--android:id="@+id/hellomoon_stopButton"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:text="@string/hellomoon_stop"/>-->
         <Button
-            android:id="@+id/hellomoon_stopButton"
+            android:id="@+id/hellomoon_playPauseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="@string/hellomoon_stop"/>
+            android:text="@string/hellomoon_playPause"/>
 
     </TableRow>
 
