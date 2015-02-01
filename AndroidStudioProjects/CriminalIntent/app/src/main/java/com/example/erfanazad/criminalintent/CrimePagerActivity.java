@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 
 import java.util.ArrayList;
@@ -25,19 +26,21 @@ public class CrimePagerActivity extends FragmentActivity {
         setContentView(mViewPager);
 
         mCrimes = CrimeLab.get(this).getCrimes();
-        FragmentManager fm = getSupportFragmentManager();
-        mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
-            @Override
-            public Fragment getItem(int position) {
-                Crime crime = mCrimes.get(position);
-                return CrimeFragment.newInstance(crime.getId());
-            }
 
-            @Override
-            public int getCount() {
-                return mCrimes.size();
-            }
-        });
+        setPagerAdapter();
+//        FragmentManager fm = getSupportFragmentManager();
+//        mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
+//            @Override
+//            public Fragment getItem(int position) {
+//                Crime crime = mCrimes.get(position);
+//                return CrimeFragment.newInstance(crime.getId());
+//            }
+//
+//            @Override
+//            public int getCount() {
+//                return mCrimes.size();
+//            }
+//        });
 
         //========Changing the title of the action bar========
 //        mViewPager.OnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -60,7 +63,6 @@ public class CrimePagerActivity extends FragmentActivity {
 //            }
 //        });
 
-
         UUID crimeId = (UUID)getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
         for(int i=0; i< mCrimes.size(); i++){
             if(mCrimes.get(i).getId().equals(crimeId)){
@@ -70,5 +72,47 @@ public class CrimePagerActivity extends FragmentActivity {
         }
 
 
+    }
+
+
+    //==========================Deleting from inside a fragment============
+    public void deletePage() {
+        int index = mViewPager.getCurrentItem();
+        mCrimes.remove(index);
+        mViewPager.getAdapter().notifyDataSetChanged();
+
+
+        if(mCrimes.size() == 0){
+            if (NavUtils.getParentActivityName(this) != null) {
+                NavUtils.navigateUpFromSameTask(this);
+            }
+        }else {
+            setPagerAdapter();
+            //try to set to the next item
+            if(index < mViewPager.getAdapter().getCount()){
+                mViewPager.setCurrentItem(index);
+            }else{//if no next item then go to previous item
+                mViewPager.setCurrentItem(index-1);
+            }
+        }
+    }
+
+    //=====================================================================
+
+
+    private void setPagerAdapter() {
+        FragmentManager fm = getSupportFragmentManager();
+        mViewPager.setAdapter(new FragmentStatePagerAdapter(fm) {
+            @Override
+            public Fragment getItem(int position) {
+                Crime crime = mCrimes.get(position);
+                return CrimeFragment.newInstance(crime.getId());
+            }
+
+            @Override
+            public int getCount() {
+                return mCrimes.size();
+            }
+        });
     }
 }

@@ -42,7 +42,7 @@ public class CrimeLab {
         mCrimes.add(c);
     }
 
-    public void deleteCriem(Crime c){
+    public void deleteCrime(Crime c){
         mCrimes.remove(c);
     }
 
@@ -54,6 +54,28 @@ public class CrimeLab {
         for(Crime c : mCrimes){
             if(c.getId().equals(id)){
                 return c;
+            }
+        }
+        return null;
+    }
+
+    public Crime getNext(UUID id){
+        for(int i=0; i<mCrimes.size(); i++){
+            if(mCrimes.get(i).getId().equals(id)){
+                if(i+1 < mCrimes.size()){
+                    return mCrimes.get(i+1);
+                }
+            }
+        }
+        return null;
+    }
+
+    public Crime getPrev(UUID id){
+        for(int i=0; i<mCrimes.size(); i++){
+            if(mCrimes.get(i).getId().equals(id)){
+                if(i-1 > -1){
+                    return mCrimes.get(i-1);
+                }
             }
         }
         return null;
